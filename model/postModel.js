@@ -7,7 +7,7 @@ let schema = new mongoose.Schema({
 
     content:{
         type:String
-    }
+    } 
     
 },{
     timestamps:true

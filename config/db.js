@@ -6,16 +6,14 @@ mongoose.connect(url,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(()=>{
-    res.send({
-        error:0,
-        msg:'数据库连接成功'
-    })
-}).catch((err)=>{
+
+   console.log('数据库连接成功')
+
+}).catch(err=>{
+
     console.log(err)
-    res.send({
-        error:1,
-        msg:'数据库连接失败'
-    })
+    console.log('数据库连接失败')
+
 })
 
 module.exports = mongoose
