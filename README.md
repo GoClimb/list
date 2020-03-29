@@ -1,4 +1,5 @@
-# 基于express+mongoose+mongoDB的帖子管理系统
+# 基于express+mongoose的帖子管理系统
 
-- 项目初始化
+采用MVC架构模式
+
 
