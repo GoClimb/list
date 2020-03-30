@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "docs":"apidoc -i ./route -o ./public/docs"
+    "docs": "apidoc -i ./route -o ./public/docs"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +14,8 @@
   "dependencies": {
     "apidoc": "^0.20.1",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.9.6"
   }
 }

@@ -94,6 +94,56 @@
   },
   {
     "type": "get",
+    "url": "http://localhost:3000/posts:/id",
+    "title": "获取详情页数据",
+    "group": "\bPost",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>需要传递id参数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "error",
+            "description": "<p>错误状态码.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>错误信息.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>\b\b\b指定id的内容.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "route/postRouter.js",
+    "groupTitle": "\bPost",
+    "name": "GetHttpLocalhost3000PostsId"
+  },
+  {
+    "type": "get",
     "url": "http://localhost:3000/posts",
     "title": "获取帖子列表",
     "name": "index",

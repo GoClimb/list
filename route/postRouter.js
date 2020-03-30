@@ -1,5 +1,5 @@
 const express = require('express')
-const {index,create,remove,update} = require('../controller/postController')
+const {index,create,remove,update,show} = require('../controller/postController')
 
 let router = express.Router()
 
@@ -58,6 +58,20 @@ router.delete('/:id',remove)
  * @apiSuccess {String} msg 错误信息.
  */
 router.put('/:id',update)
+
+
+/**
+ * @api {get} http://localhost:3000/posts:/id 获取详情页数据
+ * @apiGroup Post
+ *
+ * @apiParam {String} id 需要传递id参数
+ * 
+ * @apiSuccess {Number} error 错误状态码.
+ * @apiSuccess {String} msg 错误信息.
+ * @apiSuccess {String} data 指定id的内容.
+ */
+router.get('/:id',show)
+
 
 
 module.exports = router
