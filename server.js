@@ -8,6 +8,7 @@ app.use(express.urlencoded( { extended: true  }))
 app.use(express.static('./public'))
 
 app.use('/posts',require('./route/postRouter'))
+app.use(require('./route/userRouter'))
 
 app.use((err,req,res,next)=>{
     console.error(err)
