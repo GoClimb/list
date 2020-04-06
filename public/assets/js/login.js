@@ -1,0 +1,21 @@
+$(function(){
+   $('.btn').click(function(){
+       $.ajax({
+           url:'/login',
+           type:'post',
+           data:{
+               email:$('#inputEmail').val(),
+               password:$('#inputPassword').val()
+           },
+           success(res){
+              if(res.error!==0){
+                  alert(res.msg)
+                  return
+              }
+              Cookies.set('token',res.token)
+              alert(res.msg)
+              window.location.href = '/post/index.html'
+           }
+       })
+   })
+})

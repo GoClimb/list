@@ -2,15 +2,16 @@ const postModel = require('../model/postModel')
 
 
 exports.index = async (req,res)=>{
-    //拿到前端传递到当前是第几页
+
     let pageNum = parseInt(req.query.pageNum) || 1
-    //拿到前端传递到一页要显示多少条数据
+
     let pageSize = parseInt(req.query.pageSize) || 2
+    
     let title = req.query.title
 
     let data = await postModel.find({
         title:new RegExp(title)
-    }).skip( (pageNum-1) * pageSize ).limit(pageSize)
+    }).populate('userId',['nickname']).skip( (pageNum-1) * pageSize ).limit(pageSize)
 
     let totalNum = await postModel.find({
         title:new RegExp(title)
@@ -27,12 +28,10 @@ exports.index = async (req,res)=>{
 }
 
 exports.create = async (req,res)=>{
+    req.body.userId = req.auth.id
 
-    let {title,content} = req.body
-    await postModel.create({
-        title,
-        content
-    })
+    await postModel.create(req.body)
+
     res.send({
         error:0,
         msg:'帖子创建成功'
@@ -41,30 +40,35 @@ exports.create = async (req,res)=>{
 }
 
 exports.remove = async (req,res)=>{
-    
-    let { _id } = req.parmas
-    await postModel.deleteOne({ _id })
+    let { id } = req.params
+
+    await postModel.deleteOne({ _id:id })
     res.send({
         error:0,
-        msg:'删除帖子成功'
+        msg:'删除帖子成功',
     })
 
 }
 
 exports.update = async (req,res)=>{
 
-    let { _id } = req.parmas
-    await postModel.updateOne({ _id },req.body)
+    let {id} = req.params
+
+    await postModel.updateOne({ _id:id },req.body)
+    
+    const data = await postModel.findOne({_id:id})
     res.send({
         error:0,
-        msg:'更新帖子成功'
+        msg:'更新帖子成功',
+        data
     })
 
 }
 
 exports.show = async (req,res)=>{
     let {id} = req.params
-    let data = await postModel.findOne({ _id:id })
+    
+    let data = await postModel.findOne({ _id:id }).populate('userId',['nickname'])
     res.send({
         error:0,
         msg:'查询成功',

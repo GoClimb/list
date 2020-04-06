@@ -16,18 +16,24 @@ let schema = new mongoose.Schema({
         type:String,
         required:true
     },
+    headPortrait:{
+        type:String,
+        default:`${process.env.BASEURL}/assets/img/avatar.jpg`
+    },
     nickname:{
         type:String,
-        default:'帖子用户778'
+        default:'用户778'
     }
 },{
     timestamps:true
 })
 
 schema.pre('save',function(next){
+
     this.password = bcryptjs.hashSync(this.password,10)
-    
     next()
 })
-
+schema.methods.comparePassword = function (password) { 
+    return bcryptjs.compareSync(password,this.password)
+}
 module.exports = mongoose.model('user',schema)

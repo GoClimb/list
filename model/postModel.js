@@ -2,12 +2,18 @@ const mongoose = require('../config/db')
 
 let schema = new mongoose.Schema({
     title:{
-        type:String
+        type:String,
+        required:true
     },
-
     content:{
-        type:String
-    } 
+        type:String,
+        required:true
+    },
+    userId:{
+        type:mongoose.SchemaTypes.ObjectId,
+        ref:"user", 
+        required:true
+    }
     
 },{
     timestamps:true

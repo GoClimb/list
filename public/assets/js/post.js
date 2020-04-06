@@ -7,7 +7,7 @@ $(function(){
 
     function getData(){
         $.ajax({
-            url:'http://localhost:3000/posts',
+            url:'/posts',
             type:'get',
             data:{
                 pageNum,
@@ -28,6 +28,9 @@ $(function(){
                         }</small>
                     </div>
                     <div class="font-weight-light text-truncate">${item.content}</div>
+                    <div class="mt-2 text-black-50">
+                        <small>${item.userId.nickname}</small>
+                    </div>
                     </li> 
                     `
                 })
@@ -37,15 +40,15 @@ $(function(){
 
                  let pageHtml = ''
                  pageHtml += `
-                 <li data-page=${pageNum > 1? pageNum-1 : 1} class="page-item"><a class="page-link" href="show.html">Prev</a></li>
+                 <li data-page=${pageNum > 1? pageNum-1 : 1} class="page-item"><a class="page-link" href="javascript:;">上一页</a></li>
                  `
                  for(var i=0;i<totalPage;i++){
                     pageHtml+=`
-                    <li data-page='${ i +1 }' class="page-item ${ i+1 === pageNum ? 'active':'' }"><a class="page-link" href="javascript:;">${i+1}</a></li>
+                    <li data-page='${ i + 1 }' class="page-item ${ i+1 === pageNum ? 'active':'' }"><a class="page-link" href="javascript:;">${i+1}</a></li>
                     `
                  }
-                 pageHtml +=`
-                 <li data-page=${ pageNum > totalPage? totalPage: pageNum + 1 } class="page-item"><a class="page-link" href="javascript:;">Next</a></li>
+                 pageHtml +=`  
+                 <li data-page=${ pageNum >= totalPage? totalPage : pageNum + 1 } class="page-item"><a class="page-link" href="javascript:;">下一页</a></li>
                  `
                  $('.pagination').html(pageHtml)
             }

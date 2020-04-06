@@ -1,5 +1,6 @@
 const express = require('express')
 const {index,create,remove,update,show} = require('../controller/postController')
+const auth = require('../middleware/auth')
 
 let router = express.Router()
 
@@ -27,10 +28,9 @@ router.get('/',index)
  * @apiSuccess {Number} error错误状态码.
  * @apiSuccess {String} msg 错误信息.
  */
-router.post('/',create)
+router.post('/',auth,create)
 
 
-//创建帖子路由接口
 /**
  * @api {delete} http://localhost:3000/posts 删除帖子
  * @apiName Delete
@@ -42,7 +42,7 @@ router.post('/',create)
  * @apiSuccess {String} msg 错误信息.
  */
 //删除贴子路由接口
-router.delete('/:id',remove)
+router.delete('/:id',auth,remove)
 
 
 //修改贴子路由接口
@@ -57,7 +57,7 @@ router.delete('/:id',remove)
  * @apiSuccess {Number} error错误状态码.
  * @apiSuccess {String} msg 错误信息.
  */
-router.put('/:id',update)
+router.put('/:id',auth,update)
 
 
 /**

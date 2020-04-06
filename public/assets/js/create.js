@@ -1,0 +1,23 @@
+$(function(){
+    needLogin()
+    $('#submit-btn').click(function(){
+        $.ajax({
+            url:'/posts',
+            type:'post',
+            data:{
+                title:$('#create-title').val(),
+                content:$('#create-content').val()
+            },
+            headers:{
+                token:Cookies.get('token')
+            },
+            success(res){
+                if(res.error!=0){
+                    console.log(res)
+                }else{
+                    window.location.href = '/post/index.html'
+                }
+            }
+        })
+    })
+})
